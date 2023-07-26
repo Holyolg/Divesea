@@ -1,3 +1,4 @@
 {
-    "ecsstractor_port.bem_nesting": true
+    "ecsstractor_port.bem_nesting": true,
+    "liveServer.settings.port": 5501
 }
