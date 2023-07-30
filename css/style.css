@@ -1009,10 +1009,10 @@ footer {
   backdrop-filter: blur(5px);
 }
 
-.modal.open {
+.open {
   display: block;
 }
-.modal.close {
+.close {
   display: none;
 }
 
@@ -1027,6 +1027,7 @@ footer {
   background: white;
   border-radius: 16px;
   padding: 40px 18px;
+  height: 450px;
 }
 
 .modal__content .title {
@@ -1065,26 +1066,13 @@ footer {
 }
 
 .close__button {
-  margin-left: auto;
+  text-align: right;
   cursor: pointer;
-  width: 30px;
-  height: 20px;
-  padding: 3px;
   transition: all ease-out 100ms;
+  font-weight: 600;
 }
 
-.close__button:active {
-  transform: scale(80%);
-}
-
-.close__button-block {
-  height: 1px;
-  background-color: black;
-}
-
-.close__button-block:last-child {
-  transform: rotate(45deg);
-}
-.close__button-block:first-child {
-  transform: rotate(135deg);
+.close__button:hover {
+  color: #676767;
+  text-decoration: underline;
 }
