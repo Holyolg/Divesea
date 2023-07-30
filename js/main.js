@@ -399,6 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			e.preventDefault();
 
 			const statusMessage = document.createElement('img');
+
 			statusMessage.src = message.loading;
 			statusMessage.style.cssText = `
 			display: block;
@@ -407,10 +408,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			`;
 			form.insertAdjacentElement('afterend', statusMessage);
 
-			const request = new XMLHttpRequest();
-			request.open('POST', 'server.php');
-
-			request.setRequestHeader('Content-Type', 'aplication/json');
 			const formData = new FormData(form);
 
 			// Для json формата
@@ -418,20 +415,24 @@ document.addEventListener('DOMContentLoaded', () => {
 			formData.forEach((value, key) => {
 				obj[key] = value;
 			});
-			const json = JSON.stringify(obj);
 
-			request.send(json);
-
-			request.addEventListener('load', () => {
-				if (request.status === 200) {
+			fetch('server.php', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'aplication/json'
+				},
+				body: JSON.stringify(obj)
+			})
+				.then((data) => data.text())
+				.then((data) => {
+					console.log(data);
 					showThanksModal(message.succses);
-					form.reset();
 					statusMessage.remove();
-				} else {
+				}).catch(() => {
 					showThanksModal(message.failure);
-				}
-			});
-
+				}).finally(() => {
+					form.reset();
+				});
 		});
 	}
 
@@ -465,8 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}, 3000);
 	}
 
+
+
 });
-
-
-
 

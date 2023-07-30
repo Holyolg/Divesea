@@ -34,7 +34,7 @@
               type="placeholder"
               placeholder="Search Art Work / Creator"
               class="header__placeholder"
-              name=""
+              name="name"
               id=""
             />
           </div>
@@ -311,25 +311,7 @@
               <div class="best-seller">
                 <div class="best-seller__title">Best Sellers</div>
                 <div class="best-seller__wrapper">
-                  <div class="best-seller__users">
-                    <div class="best-seller__user">
-                      <div class="user__wrapper">
-                        <div class="user__description">
-                          <img
-                            src="/src/avatar.png"
-                            class="avatar user__avatar"
-                          />
-                          <div class="user__info">
-                            <div class="name user__name">Alex Ca.</div>
-                            <div class="nickname user__nickname">@Alexy</div>
-                          </div>
-                        </div>
-                        <button class="user__button button-white">
-                          Follow
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                  <div class="best-seller__users users"></div>
                 </div>
               </div>
               <div class="recent-viewed unleash__recent-viewed">
@@ -374,10 +356,7 @@
         <div data-modal class="modal">
           <div class="modal__wrapper">
             <div class="modal__content">
-              <div data-close class="close__button">
-                <div class="close__button-block"></div>
-                <div class="close__button-block"></div>
-              </div>
+              <div data-close class="close__button">Close ›</div>
 
               <p class="title">History of Bid</p>
 
@@ -398,16 +377,16 @@
               </div>
 
               <p class="title">Your Bid</p>
-              <div class="form__input">
+              <form class="form__input">
                 <input
                   type="placeholder"
                   placeholder=""
                   class="placeholder header__placeholder"
-                  name=""
+                  name="name"
                   id=""
                 />
                 <button class="hero__button submit__button">Submit</button>
-              </div>
+              </form>
             </div>
           </div>
         </div>
