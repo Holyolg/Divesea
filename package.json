@@ -1,3 +1,6 @@
 {
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "json-server": "^0.17.3"
+  }
 }

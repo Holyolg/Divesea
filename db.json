@@ -1,0 +1,48 @@
+{
+  "cards": [
+    {
+      "img": "/src/img/DB/imgd.png",
+      "endTimer": "02h 09m 12s",
+      "name": "Sun-Glass",
+      "price": "1.75"
+    },
+    {
+      "img": "/src/img/DB/img2.png",
+      "endTimer": "02h 09m 12s",
+      "name": "Sun-Glass",
+      "price": "1.75"
+    },
+    {
+      "img": "/src/img/DB/img3.png",
+      "endTimer": "02h 09m 12s",
+      "name": "Sun-Glass",
+      "price": "1.75"
+    },
+    {
+      "img": "/src/img/DB/img4.png",
+      "endTimer": "02h 09m 12s",
+      "name": "Sun-Glass",
+      "price": "1.75"
+    },
+    {
+      "img": "/src/img/DB/img5.png",
+      "endTimer": "02h 09m 12s",
+      "name": "Sun-Glass",
+      "price": "1.75"
+    }
+  ],
+  "requests": [
+    {
+      "name": "ds",
+      "id": 1
+    },
+    {
+      "name": "dsalf",
+      "id": 2
+    },
+    {
+      "name": "ds",
+      "id": 3
+    }
+  ]
+}

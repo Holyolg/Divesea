@@ -182,10 +182,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	let slide;
 
 	function addItemsFromDB(dataBase) {
-
-
-
-
 		for (let i = 0; i < dataBase.length; i++) {
 			slide = `<div class="slide-box">
 <div class="img-weekly__wrapper">
@@ -205,7 +201,8 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
  </div>
 </div>`;
-		} return slide;  }
+		} return slide;
+	}
 
 
 
@@ -391,10 +388,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	const forms = document.querySelectorAll('form');
 
 	forms.forEach((form) => {
-		postData(form);
+		bindPostData(form);
 	});
 
-	function postData(form) {
+	function bindPostData(form) {
 		form.addEventListener('submit', (e) => {
 			e.preventDefault();
 
@@ -410,20 +407,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			const formData = new FormData(form);
 
-			// Для json формата
-			const obj = {};
-			formData.forEach((value, key) => {
-				obj[key] = value;
-			});
+			const postData = async (url, data) => {
+				const res = await fetch(url, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: data
+				});
+				return await res.json();
+			};
 
-			fetch('server.php', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'aplication/json'
-				},
-				body: JSON.stringify(obj)
-			})
-				.then((data) => data.text())
+			// fetch('http://localhost:3000/cards', {
+			// 	method: 'POST',
+			// 	headers: {
+			// 		'Content-Type': 'aplication/json'
+			// 	},
+			// 	body: JSON.stringify(obj)
+			// })
+			// 	.then((data) => data.text())
+
+			const json = JSON.stringify(Object.fromEntries(formData.entries()));
+
+			postData('http://localhost:3000/requests', json)
 				.then((data) => {
 					console.log(data);
 					showThanksModal(message.succses);
@@ -447,10 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		thanksModal.innerHTML = `
 		<div class='modal__content'>
-		<div data-close class="close__button">
-		<div class="close__button-block"></div>
-		<div class="close__button-block"></div>
-	  </div>
+		<div data-close class="close__button">Close ›</div>
 
 	  <p class="title">${message}</p>
 	  </div>
