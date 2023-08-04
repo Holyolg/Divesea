@@ -1,54 +1,31 @@
 'use strict';
 document.addEventListener('DOMContentLoaded', () => {
+	// Меню-бургер
 
-	//dataBase
+	const burgerToggle = document.querySelector('[data-toggle]'),
+		burgerMenu = document.querySelector('.burger__menu');
 
-	const itemDB = [
-		{
-			img: '/src/Rectangle3.png',
-			endTimer: '02h 09m 12s',
-			name: 'Sun-Glass',
-			price: '1.75'
-		},
-		{
-			img: '/src/Rectangle3.png',
-			endTimer: '02h 09m 12s',
-			name: 'Sun-Glass',
-			price: '1.25'
-		},
-		{
-			img: '/src/Rectangle3.png',
-			endTimer: '02h 09m 12s',
-			name: 'Sun-Glass',
-			price: '1.75'
-		},
-		{
-			img: '/src/Rectangle3.png',
-			endTimer: '02h 09m 12s',
-			name: 'Sun-Glass',
-			price: '1.75'
-		},
-		{
-			img: '/src/Rectangle3.png',
-			endTimer: '02h 09m 12s',
-			name: 'Sun-Glass',
-			price: '1.75'
-		},
-		{
-			img: '/src/Rectangle3.png',
-			endTimer: '02h 09m 12s',
-			name: 'Sun-Glass',
-			price: '1.75'
-		},
-		{
-			img: '/src/Rectangle3.png',
-			endTimer: '02h 09m 12s',
-			name: 'Sun-Glass',
-			price: '1.75'
+
+	burgerToggle.addEventListener('click', () =>{
+		if (burgerMenu.classList.contains('hidden') && burgerToggle.classList.contains('anim-back')) {
+			burgerToggle.classList.remove('anim-back');
+			burgerToggle.classList.add('anim');
+			burgerMenu.classList.remove('hidden');
+			burgerMenu.classList.add('active');
+			document.body.style.overflow = 'hidden';
+
+		} else if(burgerMenu.classList.contains('active') && burgerToggle.classList.contains('anim')) {
+			burgerToggle.classList.remove('anim');
+			burgerToggle.classList.add('anim-back');
+			burgerMenu.classList.remove('active');
+			burgerMenu.classList.add('hidden');
+			document.body.style.overflow = '';
 		}
-	];
+	});
 
-	// Классы для юзеров
+
+
+	// Класс для юзеров
 
 	class User {
 		constructor(img, name, nickname, parentSelector, ...classes) {
@@ -179,33 +156,75 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// setClock(deadline);
 
+
+	// Swiper
+	const tabsParent = document.querySelector('.weeklySwiper ');
+
+	tabsParent.addEventListener('click', (e) => {
+		const target = e.target;
+		if(target && target.classList.contains('slide-box__button')) {
+			openModal();
+		}
+	});
+
 	let slide;
+	let arr = [];
 
-	function addItemsFromDB(dataBase) {
-		for (let i = 0; i < dataBase.length; i++) {
-			slide = `<div class="slide-box">
-<div class="img-weekly__wrapper">
- <img src="${dataBase[i].img}" class="swiper-slide__img-weekly">
- <div  class="slide-box__timer">
- <span id="hours"></span>
- <span id="minutes"></span>
- <span id="seconds"></span>
- </div>
-</div>
- <div class="slide-box__description">
-     <div class="slide-box__name">${dataBase[i].name}</div>
- <div class="slide-box__wrapper">
- <div class="slide-box__price">${dataBase[i].price}</div>
+	axios.get('http://localhost:3000/cards')
+		.then(data => data.data.forEach(({img, name, price}) => {
+			slide =`
+			<div class="slide-box">
+				<div class="img-weekly__wrapper">
+					<img src="${img}" class="swiper-slide__img-weekly">
+					<div  class="slide-box__timer">
+						<span id="hours"></span>
+						<span id="minutes"></span>
+						<span id="seconds"></span>
+					</div>
+				</div>
+					<div class="slide-box__description">
+						<div class="slide-box__name">${name}</div>
+					<div class="slide-box__wrapper">
+						<div class="slide-box__price">Current bid<br>${price}</div>
+							<button data-modal-trigger class="slide-box__button">PLACE BID</button>
+					</div>
+				</div>
+			</div>
+				`;
+			arr.push(slide);
+		})
+		).then(data => {
+			var weeklySwiper = new Swiper('.weeklySwiper',
+				{
+					slidesPerView: 5,
+					spaceBetween: 40,
+					navigation: {
+						nextEl: '.weeklySwiper-button-next',
+						prevEl: '.weeklySwiper-button-prev',
+					},
+					virtual:{
+						slides: arr
+					},
+					breakpoints: {
 
- <button data-modal-trigger class="slide-box__button">PLACE BID</button>
-</div>
- </div>
-</div>`;
-		} return slide;
-	}
+						320: {
+							freemode:true,
+							slidesPerView: 1,
+						},
+						640: {
+							freemode:true,
+							slidesPerView: 2,
+							spaceBetween: 20,
 
+						},
 
-
+						1200: {
+							freemode:true,
+							slidesPerView: 5,
+						}
+					}
+				});
+		});
 	var heroSwiper = new Swiper('.hero__swiper', {
 		centerdSlides: true,
 		loop: true,
@@ -214,26 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			prevEl: '.swiper-button-prev',
 		},
 	});
-
-	var weeklySwiper = new Swiper('.weeklySwiper', {
-		slidesPerView: 5,
-		spaceBetween: 20,
-		navigation: {
-			nextEl: '.weeklySwiper-button-next',
-			prevEl: '.weeklySwiper-button-prev',
-		},
-		virtual:{
-			slides: (function () {
-				var slides = [];
-				for (var i = 0; i < itemDB.length; i += 1) {
-					slides.push(addItemsFromDB(itemDB));
-				}
-				return slides;
-			}()),
-		},
-
-	});
-
 
 
 
@@ -370,8 +369,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	modal.addEventListener('click', (e) => {
 		if (e.target === modal || e.target.getAttribute('data-close') == '') {
-			console.log(e.target);
-
 			closeModal();
 		}
 	});

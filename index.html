@@ -23,13 +23,13 @@
           <a href="index.html" class="logo">
             <img src="/src/Logo.svg" />
           </a>
-          <nav>
+          <nav class="nav">
             <a href="shop.html">DISCOVER</a>
             <a href="">CREATORS</a>
             <a href="">SELL</a>
             <a href="">STATS</a>
           </nav>
-          <div>
+          <div class="search-input">
             <input
               type="placeholder"
               placeholder="Search Art Work / Creator"
@@ -39,6 +39,29 @@
             />
           </div>
           <button class="header__button">CONNECT WALLET</button>
+          <div class="burger">
+            <div data-toggle class="burger__toggle anim-back">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="burger__menu hidden">
+            <div class="menu__search-input">
+              <input
+                type="placeholder"
+                placeholder="Search Art Work / Creator"
+                class="header__placeholder"
+                name="name"
+                id=""
+              />
+            </div>
+            <nav class="menu__nav">
+              <a href="shop.html">DISCOVER</a>
+              <a href="">CREATORS</a>
+              <a href="">SELL</a>
+              <a href="">STATS</a>
+            </nav>
+            <button class="menu__button">CONNECT WALLET</button>
+          </div>
         </div>
       </header>
       <main>
@@ -156,7 +179,7 @@
           </div>
         </div>
 
-        <div class="collection">
+        <!-- <div class="collection">
           <div class="collection__tittle">Top Collection</div>
           <div class="collection__tabble">
             <div class="tabble__wrapper tabble__wrapper-tittle">
@@ -180,10 +203,10 @@
             </div>
             <hr class="tabble__hr" />
           </div>
-        </div>
+        </div> -->
 
         <div class="market">
-          <div class="market__title">Explore Marketplace</div>
+          <h2 class="market__title">Explore Marketplace</h2>
           <div class="market__sort">
             <button class="market__button button-white">All</button>
             <button class="market__button button-white">Category</button>
@@ -281,10 +304,10 @@
         <div class="unleash">
           <div class="unleash__wrapper">
             <div class="unleash__left">
-              <div class="unleash__title">
+              <h2 class="unleash__title">
                 Just Unleash - <br />
                 Your Inner Collector
-              </div>
+              </h2>
               <ul class="unleash__ul">
                 <li>Best Seller All Around World</li>
                 <li>$2M+ Transections Every Day</li>
@@ -341,7 +364,7 @@
         <div class="promo">
           <div class="promo__wrapper">
             <div class="promo__left">
-              <div class="promo__title">Create and Sell NFTs</div>
+              <h2 class="promo__title">Create and Sell NFTs</h2>
               <div class="promo__descriptions">World’s Largest NFT Place</div>
               <div class="hero__buttons">
                 <button class="promo__button-white">Explore More</button>
