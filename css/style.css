@@ -480,6 +480,9 @@ h2 {
 .swiper-slide__img {
   box-shadow: 0px 10px 25px rgb(207, 225, 248);
   border-radius: 30px;
+  width: 80%;
+  height: 500px;
+  object-fit: cover;
 }
 
 .swiper-slide__img-weekly {
